@@ -11,6 +11,13 @@ namespace N2FPasswordManager.Controllers
     public class ValuesController : ApiController
     {
         // GET api/values
+        /// <summary>
+        /// Get list of strings
+        /// </summary>
+        /// <remarks>
+        /// Returns a list of the default string values.
+        /// </remarks>
+        /// <returns>List of string values</returns>
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
