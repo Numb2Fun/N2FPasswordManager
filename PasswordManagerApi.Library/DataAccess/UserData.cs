@@ -6,7 +6,7 @@ using System.Text;
 
 namespace PasswordManagerApi.Library.DataAccess
 {
-    public class UserData
+    public class UserData : IUserData
     {
 
         public IEnumerable<UserDataModel> GetAllUsers()

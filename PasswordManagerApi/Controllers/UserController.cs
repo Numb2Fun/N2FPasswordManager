@@ -10,6 +10,18 @@ namespace PasswordManagerApi.Controllers
 {
     public class UserController : Controller
     {
+        private readonly IUserData _userData;
+
+        public UserController()
+        {
+            _userData = new UserData();
+        }
+
+        public UserController(IUserData userData)
+        {
+            _userData = userData;
+        }
+
         // GET: User
         public ActionResult Index()
         {
@@ -18,8 +30,7 @@ namespace PasswordManagerApi.Controllers
 
         public ActionResult GetAllUsers()
         {   
-            var userData = new UserData();
-            var data = userData.GetAllUsers();
+            var data = _userData.GetAllUsers();
             var users = new List<UserModel>();
 
             foreach (var user in data)
