@@ -35,6 +35,7 @@ namespace PasswordManagerApi.Models
     public class RegisterBindingModel
     {
         [Required]
+        [DataType(DataType.EmailAddress)]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
@@ -53,6 +54,7 @@ namespace PasswordManagerApi.Models
     public class RegisterExternalBindingModel
     {
         [Required]
+        [DataType(DataType.EmailAddress)]
         [Display(Name = "Email")]
         public string Email { get; set; }
     }

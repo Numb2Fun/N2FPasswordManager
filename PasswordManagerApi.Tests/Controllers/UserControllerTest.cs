@@ -5,9 +5,6 @@ using PasswordManagerApi.Models;
 using PasswordManagerApi.Tests.MockObjects.DataAccess;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Mvc;
 using Xunit;
 
@@ -16,7 +13,7 @@ namespace PasswordManagerApi.Tests.Controllers
     public class UserControllerTest
     {
         [Fact]
-        public void GetAllUsers_ViewContainsUsers()
+        public void GetAllUsers_ViewContainsUserCount()
         {
             var user1 = new UserDataModel() { UserName = "user1", EmailAddress = "user1@mail.com", DateCreated = DateTime.Today };
             var user2 = new UserDataModel() { UserName = "user2", EmailAddress = "user2@mail.com", DateCreated = DateTime.Today };
