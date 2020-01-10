@@ -1,14 +1,13 @@
 ﻿using System.Web.Mvc;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PasswordManagerApi;
 using PasswordManagerApi.Controllers;
+using Xunit;
 
 namespace PasswordManagerApi.Tests.Controllers
 {
-    [TestClass]
     public class HomeControllerTest
     {
-        [TestMethod]
+        [Fact]
         public void Index()
         {
             // Arrange
@@ -18,8 +17,8 @@ namespace PasswordManagerApi.Tests.Controllers
             ViewResult result = controller.Index() as ViewResult;
 
             // Assert
-            Assert.IsNotNull(result);
-            Assert.AreEqual("Home Page", result.ViewBag.Title);
+            Assert.NotNull(result);
+            Assert.Equal("Home Page", result.ViewBag.Title);
         }
     }
 }
