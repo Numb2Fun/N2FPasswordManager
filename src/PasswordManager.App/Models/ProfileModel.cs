@@ -1,4 +1,5 @@
 ﻿using PasswordManager.Library.Enums;
+using PasswordManager.Library.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,5 +17,17 @@ namespace PasswordManager.App.Models
         public string Password { get; set; }
         public string SignUpEmail { get; set; }
         public DateTime LastUpdated { get; set; }
+
+        public ProfileModel(ProfileDataModel data)
+        {
+            Id = data.Id;
+            Category = (ProfileCategory)data.CategoryId;
+            Title = data.Title;
+            Website = data.Website;
+            LoginName = data.LoginName;
+            Password = data.Password;
+            SignUpEmail = data.SignUpEmail;
+            LastUpdated = data.LastUpdated;
+        }
     }
 }

@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using PasswordManager.App.Models;
+using PasswordManager.Library.DataAccess;
+using PasswordManager.Library.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,10 +12,34 @@ namespace PasswordManager.App.Controllers
 {
     public class ProfileController : Controller
     {
-        // GET: Profile
+        private readonly IProfileData _profileData;
+
+        public ProfileController()
+        {
+            _profileData = new ProfileData();
+        }
+
+        public ProfileController(IProfileData profileData)
+        {
+            _profileData = profileData;
+        }
+
+        /// <summary>
+        /// Gets list of profiles associated with currently logged user.
+        /// </summary>
+        /// <returns>Index view with list of ProfileModels</returns>
         public ActionResult Index()
         {
-            return View();
+            List<ProfileModel> profiles = new List<ProfileModel>();
+            string userId = User.Identity.GetUserId();
+            IEnumerable<ProfileDataModel> data = _profileData.GetProfilesForUser(userId);
+
+            foreach (var m in data)
+            {
+                profiles.Add(new ProfileModel(m));
+            }
+
+            return View(profiles);
         }
 
         // GET: Profile/Details/5
