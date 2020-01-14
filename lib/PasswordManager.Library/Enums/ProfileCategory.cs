@@ -8,6 +8,6 @@ namespace PasswordManager.Library.Enums
 {
     public enum ProfileCategory
     {
-
+        None = 0
     }
 }

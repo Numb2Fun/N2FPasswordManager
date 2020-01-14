@@ -56,18 +56,28 @@ namespace PasswordManager.App.Controllers
 
         // POST: Profile/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(ProfileModel profile)
         {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
+            if (ModelState.IsValid == false)
                 return View();
-            }
+
+            string userId = User.Identity.GetUserId();
+            int catId = (int)profile.Category;
+
+            var data = new ProfileDataModel()
+            {
+                UserId = userId,
+                CategoryId = catId,
+                Title = profile.Title,
+                Website = profile.Website,
+                LoginName = profile.LoginName,
+                Password = profile.Password,
+                SignUpEmail = profile.SignUpEmail
+            };
+
+            _profileData.InsertProfileForUser(data);
+
+            return RedirectToAction("Index");
         }
 
         // GET: Profile/Edit/5
