@@ -23,7 +23,7 @@ namespace PasswordManager.Library.DataAccess
             IEnumerable<ProfileDataModel> data;
             object sqlParams = new { @userId = userId };
 
-            data = _dataAccess.LoadData<ProfileDataModel>(SqlDefinitions.spGetProfilesByUser, SqlDefinitions.dboName, sqlParams);
+            data = _dataAccess.LoadData<ProfileDataModel>(DboNames.spGetProfilesByUser, DboNames.dboName, sqlParams);
 
             return data;
         }
@@ -41,7 +41,24 @@ namespace PasswordManager.Library.DataAccess
                 @signUpEmail = data.SignUpEmail
             };
 
-            _dataAccess.SaveData(SqlDefinitions.spInsertProfileByUser, SqlDefinitions.dboName, sqlParams);
+            _dataAccess.SaveData(DboNames.spInsertProfileByUser, DboNames.dboName, sqlParams);
+        }
+
+        public void UpdateProfile(ProfileDataModel data)
+        {
+            object sqlParams = new
+            {
+                @id = data.Id,
+                @categoryId = data.CategoryId,
+                @title = data.Title,
+                @website = data.Website,
+                @loginName = data.LoginName,
+                @password = data.Password,
+                @signUpEmail = data.SignUpEmail,
+                @lastUpdated = data.LastUpdated
+            };
+
+            _dataAccess.SaveData(DboNames.spUpdateProfile, DboNames.dboName, sqlParams);
         }
     }
 }

@@ -7,5 +7,6 @@ namespace PasswordManager.Library.DataAccess
     {
         IEnumerable<ProfileDataModel> GetProfilesForUser(string userId);
         void InsertProfileForUser(ProfileDataModel data);
+        void UpdateProfile(ProfileDataModel data);
     }
 }

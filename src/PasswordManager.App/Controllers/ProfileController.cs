@@ -42,10 +42,36 @@ namespace PasswordManager.App.Controllers
             return View(profiles);
         }
 
-        // GET: Profile/Details/5
-        public ActionResult Details(int id)
+        // GET: Profile/Edit/5
+        public ActionResult Edit(ProfileModel profile)
         {
-            return View();
+            return View(profile);
+        }
+
+        // POST: Profile/Edit/5
+        [HttpPost]
+        public ActionResult Edit(int id, ProfileModel profile)
+        {
+            if (ModelState.IsValid == false)
+                return View();
+
+            int catId = (int)profile.Category;
+
+            var data = new ProfileDataModel()
+            {
+                Id = id,
+                CategoryId = catId,
+                Title = profile.Title,
+                Website = profile.Website,
+                LoginName = profile.LoginName,
+                Password = profile.Password,
+                SignUpEmail = profile.SignUpEmail,
+                LastUpdated = DateTime.Today
+            };
+
+            _profileData.UpdateProfile(data);
+
+            return RedirectToAction("Index");
         }
 
         // GET: Profile/Create
@@ -80,28 +106,6 @@ namespace PasswordManager.App.Controllers
             return RedirectToAction("Index");
         }
 
-        // GET: Profile/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Profile/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
         // GET: Profile/Delete/5
         public ActionResult Delete(int id)
         {
@@ -122,6 +126,12 @@ namespace PasswordManager.App.Controllers
             {
                 return View();
             }
+        }
+
+        // GET: Profile/Details/5
+        public ActionResult Details(int id)
+        {
+            return View();
         }
     }
 }
