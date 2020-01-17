@@ -1,17 +1,13 @@
 ﻿using PasswordManager.Library.Enums;
 using PasswordManager.Library.Models;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace PasswordManager.App.Models
 {
     public class ProfileModel
     {
         public int Id { get; set; }
-
         public ProfileCategory Category { get; set; }
         [Required]
         public string Title { get; set; }
@@ -20,6 +16,24 @@ namespace PasswordManager.App.Models
         public string Password { get; set; }
         public string SignUpEmail { get; set; }
         public DateTime LastUpdated { get; set; }
+
+        public string PreviousPassword { get; set; }
+        public string AgeOfPassword
+        {
+            get
+            {
+                string age = $"{(DateTime.Now - LastUpdated).Days.ToString()} days";
+                return age;
+            }
+        }
+        public bool HasPasswordChanged
+        {
+            get
+            {
+                bool changed = Password != PreviousPassword;
+                return changed;
+            }
+        }
 
         public ProfileModel()
         {

@@ -13,6 +13,7 @@ namespace PasswordManager.App.Controllers
     public class ProfileController : Controller
     {
         private readonly IProfileData _profileData;
+        private string passwordBeforeEdit;
 
         public ProfileController()
         {
@@ -45,6 +46,7 @@ namespace PasswordManager.App.Controllers
         // GET: Profile/Edit/5
         public ActionResult Edit(ProfileModel profile)
         {
+            profile.PreviousPassword = profile.Password;
             return View(profile);
         }
 
@@ -54,6 +56,9 @@ namespace PasswordManager.App.Controllers
         {
             if (ModelState.IsValid == false)
                 return View();
+
+            if (profile.HasPasswordChanged)
+                profile.LastUpdated = DateTime.Now;
 
             int catId = (int)profile.Category;
 
@@ -66,7 +71,7 @@ namespace PasswordManager.App.Controllers
                 LoginName = profile.LoginName,
                 Password = profile.Password,
                 SignUpEmail = profile.SignUpEmail,
-                LastUpdated = DateTime.Today
+                LastUpdated = profile.LastUpdated
             };
 
             _profileData.UpdateProfile(data);
