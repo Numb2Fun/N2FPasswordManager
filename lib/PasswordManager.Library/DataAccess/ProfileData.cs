@@ -60,5 +60,10 @@ namespace PasswordManager.Library.DataAccess
 
             _dataAccess.SaveData(DboNames.spUpdateProfile, DboNames.dboName, sqlParams);
         }
+
+        public void DeleteProfile(int id)
+        {
+            _dataAccess.SaveData(DboNames.spDeleteProfile, DboNames.dboName, new { @id = id });
+        }
     }
 }

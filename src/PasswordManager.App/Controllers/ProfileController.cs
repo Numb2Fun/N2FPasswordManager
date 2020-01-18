@@ -112,25 +112,18 @@ namespace PasswordManager.App.Controllers
         }
 
         // GET: Profile/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(ProfileModel profile)
         {
-            return View();
+            return View(profile);
         }
 
         // POST: Profile/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            _profileData.DeleteProfile(id);
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction("Index");
         }
 
         // GET: Profile/Details/5
