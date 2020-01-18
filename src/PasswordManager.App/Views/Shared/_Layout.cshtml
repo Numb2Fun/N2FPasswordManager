@@ -20,9 +20,14 @@
                 @Html.ActionLink("N2F Password Manager", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Profiles", "Index", "Profile")</li>
-                </ul>
+                @if (User.Identity.IsAuthenticated @*&& User.IsInRole("")*@)
+                {
+                    <ul class="nav navbar-nav">
+                        <li>
+                            @Html.ActionLink("Profiles", "Index", "Profile")
+                        </li>
+                    </ul>
+                }
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
