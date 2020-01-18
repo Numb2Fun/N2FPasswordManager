@@ -1,0 +1,62 @@
+﻿@model IEnumerable<PasswordManager.App.Models.ProfileModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Your Profiles</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Website)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LoginName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Password)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SignUpEmail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AgeOfPassword)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Website)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LoginName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Password)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SignUpEmail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AgeOfPassword)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", item) |
+            @Html.ActionLink("Delete", "Delete", item)
+        </td>
+    </tr>
+}
+
+</table>

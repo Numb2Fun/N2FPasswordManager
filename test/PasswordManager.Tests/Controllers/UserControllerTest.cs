@@ -29,7 +29,7 @@ namespace PasswordManager.Tests.Controllers
 
             var controller = new UserController(userData);
             var view = controller.GetAllUsers() as ViewResult;
-            var viewData = (List<UserModel>)view.Model;
+            var viewData = view.Model as List<UserModel>;
 
             Assert.Equal(3, viewData.Count);
         }
