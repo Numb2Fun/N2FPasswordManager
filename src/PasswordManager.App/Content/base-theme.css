@@ -1,0 +1,120 @@
+﻿
+:root {
+    --banner-width: 256px;
+}
+
+body {
+    font-family: 'Share Tech', sans-serif;
+    background-color: #005612;
+    color: #eee;
+    margin: 0;
+    padding: 0;
+    font-size: 18px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/* Custom Definitions */
+.banner {
+    width: 80%;
+    height: 75%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: space-between;
+}
+
+.banner h1 {
+    text-align: center;
+    font-size: 64px;
+}
+
+.banner img {
+    margin: 0 auto;
+    width: var(--banner-width);
+}
+
+.banner-header {
+    width: var(--banner-width);
+    margin: auto;
+    margin-top: 24px;
+    text-align: center;
+}
+
+.banner-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.form-item-group {
+    width: var(--banner-width);
+    margin: auto;
+    margin-top: 15px;
+    padding: 5px;
+    display: grid;
+}
+
+.form-label {
+    
+}
+
+.form-textbox {
+    color: #000;
+    border-radius: 5px;
+}
+
+.form-message {
+    
+}
+
+.checkbox-group {
+    display: inline-block;
+    margin-top: 15px;
+}
+
+.form-btn {
+    background-color: transparent;
+    margin-top: 16px;
+    border: solid 4px;
+    color: #ddd;
+    width: 128px;
+    height: 48px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.form-btn:hover {
+    background-color: #ddd;
+    color: #005612;
+}
+
+.form-link {
+    color: #ccc;
+    text-decoration: underline;
+    margin-top: 20px;
+}
+
+.form-link:hover {
+    color: #fff;
+}
