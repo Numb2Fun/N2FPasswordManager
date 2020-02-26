@@ -10,6 +10,55 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+<ul class="profile-list">
+    @foreach (var item in Model)
+    {
+        <li>
+            <button class="profile-title">
+                @Html.DisplayFor(modelItem => item.Title)
+            </button>
+            <div class="profile-details">
+                <h4>@Html.DisplayNameFor(model => model.Website):</h4>
+                @Html.TextBoxFor(modelItem => item.Website, new { @class = "profile-textbox" })
+
+                <h4>@Html.DisplayNameFor(model => model.LoginName):</h4>
+                @Html.TextBoxFor(modelItem => item.LoginName, new { @class = "profile-textbox" })
+
+                <h4>@Html.DisplayNameFor(model => model.Password):</h4>
+                @Html.TextBoxFor(modelItem => item.Password, new { @class = "profile-textbox" })
+            </div>
+        </li>
+    }
+</ul>
+
+@section Scripts {
+    <script>
+        const details = document.querySelectorAll('.profile-details');
+        const titleBtns = document.querySelectorAll('.profile-title');
+
+        collapseAll();
+
+        titleBtns.forEach((btn, index) => btn.addEventListener('click', (e) => {
+            if (details[index].style.display === 'none') {
+                collapseAll();
+                details[index].style.display = 'grid';
+            }
+            else {
+                details[index].style.display = 'none'
+            }
+        }));
+
+        function collapseAll() {
+            details.forEach((item) => {
+                item.style.display = 'none';
+            });
+        };
+
+    </script>
+}
+
+@*
 <table class="table">
     <tr>
         <th>
@@ -61,3 +110,4 @@
 }
 
 </table>
+*@

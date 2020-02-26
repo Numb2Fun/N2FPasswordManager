@@ -31,7 +31,48 @@ textarea {
     max-width: 280px;
 }
 
-/* Profiles Page */
+/* Profiles */
+.profile-list {
+    width: 80vw;
+    margin: 0 auto;
+    text-decoration: none;
+    list-style-type: none;
+}
+
+.profile-title {
+    width: 500px;
+    height: 36px;
+    border-width: 4px;
+    border-radius: 5px;
+    font-size: 26px;
+    background-color: var(--theme-color);
+    color: #fff;
+    text-indent: 12px;
+    text-align: left;
+}
+
+.profile-details {
+    margin: 6px 0;
+    width: 400px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-gap: 6px; 
+    grid-auto-rows: min-content;
+}
+
+.profile-details h4 {
+    text-align: right;
+}
+
+.profile-details * {
+    margin: 0;
+}
+
+.profile-textbox {
+    
+}
+
+/* Navbar */
 .navbar {
     background-color: var(--theme-color);
     color: #ddd;
