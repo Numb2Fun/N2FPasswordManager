@@ -31,6 +31,11 @@ namespace PasswordManager.App.Controllers
         /// <returns>Index view with list of ProfileModels</returns>
         public ActionResult Index()
         {
+            if (User.Identity.IsAuthenticated == false)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
             List<ProfileModel> profiles = new List<ProfileModel>();
             string userId = User.Identity.GetUserId();
             IEnumerable<ProfileDataModel> data = _profileData.GetProfilesForUser(userId);
