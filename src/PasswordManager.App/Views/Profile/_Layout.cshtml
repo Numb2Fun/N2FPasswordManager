@@ -4,12 +4,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>N2F Password Manager</title>
+    <link href="https://fonts.googleapis.com/css?family=Share+Tech&display=swap" rel="stylesheet">
 
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
-<body>
+<body class="nav-background">
     <div class="navbar">
         <div class="navbar-group">
             <h2>Password Manager</h2>
@@ -26,7 +27,7 @@
         </div>
     </div>
 
-    <div class="container body-content">
+    <div class="content-container">
         @RenderBody()
         <hr />
         <footer>

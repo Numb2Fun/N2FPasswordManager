@@ -27,6 +27,12 @@
 
                 <h4>@Html.DisplayNameFor(model => model.Password):</h4>
                 @Html.TextBoxFor(modelItem => item.Password, new { @class = "profile-textbox" })
+
+                <h4>@Html.DisplayNameFor(model => model.SignUpEmail):</h4>
+                @Html.TextBoxFor(modelItem => item.SignUpEmail, new { @class = "profile-textbox" })
+
+                <h4>@Html.DisplayNameFor(model => model.AgeOfPassword):</h4>
+                @Html.TextBoxFor(modelItem => item.AgeOfPassword, new { @class = "profile-textbox" })
             </div>
         </li>
     }
@@ -36,22 +42,37 @@
     <script>
         const details = document.querySelectorAll('.profile-details');
         const titleBtns = document.querySelectorAll('.profile-title');
+        let currentBtn = null;
+        let currentDtls;
 
         collapseAll();
 
         titleBtns.forEach((btn, index) => btn.addEventListener('click', (e) => {
-            if (details[index].style.display === 'none') {
-                collapseAll();
-                details[index].style.display = 'grid';
+            
+            if (currentBtn != null) {
+                // Animate transition
+                currentDtls.style.maxHeight = null;
+                // Turn off displays
+                currentBtn.style.border = 'none';
+            }
+
+            if (currentBtn != btn) {
+                currentBtn = btn;
+                currentDtls = details[index];
+                // Turn on displays
+                currentBtn.style.border = 'solid 4px var(--accent-color)';
+                currentDtls.style.display = 'grid';
+                // Animate transition
+                currentDtls.style.maxHeight = currentDtls.scrollHeight + 'px';
             }
             else {
-                details[index].style.display = 'none'
+                currentBtn = null;
             }
         }));
 
         function collapseAll() {
             details.forEach((item) => {
-                item.style.display = 'none';
+                item.style.maxHeight = null;
             });
         };
 

@@ -22,7 +22,7 @@ namespace PasswordManager.App.Models
         {
             get
             {
-                string age = $"{(DateTime.Now - LastUpdated).Days.ToString()} days";
+                string age = $"{(DateTime.Now - LastUpdated).Days.ToString()} day(s)";
                 return age;
             }
         }
