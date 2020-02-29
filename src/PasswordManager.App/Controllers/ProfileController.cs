@@ -95,7 +95,7 @@ namespace PasswordManager.App.Controllers
         public ActionResult Create(ProfileModel profile)
         {
             if (ModelState.IsValid == false)
-                return View();
+                return PartialView();
 
             string userId = User.Identity.GetUserId();
             int catId = (int)profile.Category;

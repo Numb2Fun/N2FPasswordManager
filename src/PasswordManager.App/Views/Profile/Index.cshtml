@@ -5,34 +5,41 @@
     Layout = "~/Views/Profile/_Layout.cshtml";
 }
 
-<h2>Your Profiles</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<h2>User Profiles</h2>
 
 <ul class="profile-list">
+    <li>
+        <button class="profile-title">
+            + Add New Profile
+        </button>
+        @Html.Partial("_CreatePartial", new PasswordManager.App.Models.ProfileModel())
+    </li>
+
     @foreach (var item in Model)
     {
         <li>
             <button class="profile-title">
                 @Html.DisplayFor(modelItem => item.Title)
             </button>
-            <div class="profile-details">
-                <h4>@Html.DisplayNameFor(model => model.Website):</h4>
-                @Html.TextBoxFor(modelItem => item.Website, new { @class = "profile-textbox" })
+            <div class="profile-detail-group">
+                <div class="profile-details">
+                    <h4>@Html.DisplayNameFor(model => model.Website):</h4>
+                    @Html.TextBoxFor(modelItem => item.Website, new { @class = "profile-textbox" })
 
-                <h4>@Html.DisplayNameFor(model => model.LoginName):</h4>
-                @Html.TextBoxFor(modelItem => item.LoginName, new { @class = "profile-textbox" })
+                    <h4>@Html.DisplayNameFor(model => model.LoginName):</h4>
+                    @Html.TextBoxFor(modelItem => item.LoginName, new { @class = "profile-textbox" })
 
-                <h4>@Html.DisplayNameFor(model => model.Password):</h4>
-                @Html.TextBoxFor(modelItem => item.Password, new { @class = "profile-textbox" })
+                    <h4>@Html.DisplayNameFor(model => model.Password):</h4>
+                    @Html.TextBoxFor(modelItem => item.Password, new { @class = "profile-textbox" })
 
-                <h4>@Html.DisplayNameFor(model => model.SignUpEmail):</h4>
-                @Html.TextBoxFor(modelItem => item.SignUpEmail, new { @class = "profile-textbox" })
+                    <h4>@Html.DisplayNameFor(model => model.SignUpEmail):</h4>
+                    @Html.TextBoxFor(modelItem => item.SignUpEmail, new { @class = "profile-textbox" })
 
-                <h4>@Html.DisplayNameFor(model => model.AgeOfPassword):</h4>
-                @Html.TextBoxFor(modelItem => item.AgeOfPassword, new { @class = "profile-textbox" })
+                    <h4>@Html.DisplayNameFor(model => model.AgeOfPassword):</h4>
+                    @Html.TextBoxFor(modelItem => item.AgeOfPassword, new { @class = "profile-textbox" })
+                </div>
+
+                @Html.ValidationSummary(false, "", new { @class = "form-message" })
             </div>
         </li>
     }
@@ -40,7 +47,7 @@
 
 @section Scripts {
     <script>
-        const details = document.querySelectorAll('.profile-details');
+        const details = document.querySelectorAll('.profile-detail-group');
         const titleBtns = document.querySelectorAll('.profile-title');
         let currentBtn = null;
         let currentDtls;
@@ -61,7 +68,7 @@
                 currentDtls = details[index];
                 // Turn on displays
                 currentBtn.style.border = 'solid 4px var(--accent-color)';
-                currentDtls.style.display = 'grid';
+                currentDtls.style.display = 'flex';
                 // Animate transition
                 currentDtls.style.maxHeight = currentDtls.scrollHeight + 'px';
             }
@@ -78,57 +85,3 @@
 
     </script>
 }
-
-@*
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Website)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LoginName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Password)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SignUpEmail)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AgeOfPassword)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Website)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LoginName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Password)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SignUpEmail)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AgeOfPassword)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", item) |
-            @Html.ActionLink("Delete", "Delete", item)
-        </td>
-    </tr>
-}
-
-</table>
-*@

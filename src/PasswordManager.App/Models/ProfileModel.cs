@@ -8,21 +8,42 @@ namespace PasswordManager.App.Models
     public class ProfileModel
     {
         public int Id { get; set; }
+
         public ProfileCategory Category { get; set; }
+
         [Required]
         public string Title { get; set; }
+
         public string Website { get; set; }
+
+        [Display(Name = "Login Name")]
         public string LoginName { get; set; }
+
         public string Password { get; set; }
+
+        [Display(Name = "Sign Up Email")]
         public string SignUpEmail { get; set; }
+
         public DateTime LastUpdated { get; set; }
 
         public string PreviousPassword { get; set; }
+
+        [Display(Name = "Age of Password")]
         public string AgeOfPassword
         {
             get
             {
-                string age = $"{(DateTime.Now - LastUpdated).Days.ToString()} day(s)";
+                int days = (DateTime.Now - LastUpdated).Days;
+                string age;
+                if (days < 31)
+                {
+                    age = $"{days.ToString()} day(s)";
+                }
+                else
+                {
+                    age = $"{(days / 30f).ToString("0.0")} month(s)";
+                }
+
                 return age;
             }
         }
