@@ -1,11 +1,11 @@
 ﻿@model PasswordManager.App.Models.ProfileViewModel
 
-@Scripts.Render("~/bundles/jquery")
-@Scripts.Render("~/bundles/jqueryval")
-
-@using (Html.BeginForm("Create", "Profile", FormMethod.Post, new { @class = "profile-create-group" }))
+@using (Html.BeginForm("Edit", "Profile", FormMethod.Post, new { @class = "profile-edit-group" }))
 {
     @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.PreviousPassword)
+    @Html.HiddenFor(model => model.LastUpdated)
 
     <div class="profile-details">
         <h4>@Html.LabelFor(model => model.Title):</h4>
@@ -27,6 +27,7 @@
     @Html.ValidationSummary(false, "", new { @class = "form-message" })
 
     <div class="profile-btn-group">
-        <input type="submit" value="Create" class="profile-btn" />
+        <button type="button" class="profile-btn" onclick="onCancelEditClick()">Cancel</button>
+        <input type="submit" value="Save" class="profile-btn save-btn" />
     </div>
 }

@@ -5,7 +5,7 @@
     --accent-background: #00330b;
     --primary-background: #333;
     --secondary-background: #1a1a1a;
-    --primary-text: #ddd;
+    --primary-text: #ccc;
     --secondary-text: #fff;
 }
 
@@ -17,7 +17,7 @@ body {
     font-size: 18px;
 }
 
-h2, h3, h4 {
+h2, h3, h4, h5 {
     font-weight: normal;
 }
 
@@ -47,6 +47,13 @@ textarea {
     margin: 0 0 0 50px;
     text-decoration: none;
     list-style-type: none;
+}
+
+.profile-title-bar {
+    display: flex;
+    background-color: var(--secondary-background);
+    align-items: center;
+    border-radius: 5px;
 }
 
 .profile-title {
@@ -87,12 +94,18 @@ textarea {
     font-weight: bold;
 }
 
+.profile-btn:focus {
+    outline-color: var(--accent-color);
+}
+
 .profile-btn:hover {
     background-color: var(--primary-text);
     color: var(--primary-background);
 }
 
-.profile-detail-group {
+.profile-create-group,
+.profile-detail-group,
+.profile-edit-group {
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.25s ease-out;
@@ -109,16 +122,24 @@ textarea {
     grid-template-columns: 1fr 2fr;
     grid-gap: 6px; 
     grid-auto-rows: min-content;
+    align-items: end;
 }
 
 .profile-details h4 {
     text-align: right;
+    color: var(--primary-text);
+}
+
+.profile-details h3 {
+    text-align: left;
     color: var(--secondary-text);
 }
 
 .profile-details * {
     margin: 0;
 }
+
+.profile-
 
 .profile-textbox {
     

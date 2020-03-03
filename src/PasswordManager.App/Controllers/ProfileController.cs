@@ -36,20 +36,20 @@ namespace PasswordManager.App.Controllers
                 return RedirectToAction("Login", "Account");
             }
 
-            List<ProfileModel> profiles = new List<ProfileModel>();
+            List<ProfileViewModel> profiles = new List<ProfileViewModel>();
             string userId = User.Identity.GetUserId();
             IEnumerable<ProfileDataModel> data = _profileData.GetProfilesForUser(userId);
 
             foreach (var m in data)
             {
-                profiles.Add(new ProfileModel(m));
+                profiles.Add(new ProfileViewModel(m));
             }
 
             return View(profiles);
         }
 
         // GET: Profile/Edit/5
-        public ActionResult Edit(ProfileModel profile)
+        public ActionResult Edit(ProfileViewModel profile)
         {
             profile.PreviousPassword = profile.Password;
             return View(profile);
@@ -57,7 +57,7 @@ namespace PasswordManager.App.Controllers
 
         // POST: Profile/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, ProfileModel profile)
+        public ActionResult Edit(int id, ProfileViewModel profile)
         {
             if (ModelState.IsValid == false)
                 return View();
@@ -92,7 +92,7 @@ namespace PasswordManager.App.Controllers
 
         // POST: Profile/Create
         [HttpPost]
-        public ActionResult Create(ProfileModel profile)
+        public ActionResult Create(ProfileViewModel profile)
         {
             if (ModelState.IsValid == false)
                 return PartialView();
@@ -117,7 +117,7 @@ namespace PasswordManager.App.Controllers
         }
 
         // GET: Profile/Delete/5
-        public ActionResult Delete(ProfileModel profile)
+        public ActionResult Delete(ProfileViewModel profile)
         {
             return View(profile);
         }

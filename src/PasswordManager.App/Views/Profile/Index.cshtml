@@ -1,4 +1,4 @@
-﻿@model IEnumerable<PasswordManager.App.Models.ProfileModel>
+﻿@model IEnumerable<PasswordManager.App.Models.ProfileViewModel>
 
 @{
     ViewBag.Title = "Index";
@@ -9,76 +9,126 @@
 
 <ul class="profile-list">
     <li>
-        <button class="profile-title">
-            + Add New Profile
-        </button>
-        @Html.Partial("_CreatePartial", new PasswordManager.App.Models.ProfileModel())
+        <div class="profile-title-bar">
+            <button class="profile-title profile-add">
+                + Add New Profile
+            </button>
+        </div>
+        @Html.Partial("_CreatePartial", new PasswordManager.App.Models.ProfileViewModel())
     </li>
 
     @foreach (var item in Model)
     {
         <li>
-            <button class="profile-title">
-                @Html.DisplayFor(modelItem => item.Title)
-            </button>
-            <div class="profile-detail-group">
-                <div class="profile-details">
-                    <h4>@Html.DisplayNameFor(model => model.Website):</h4>
-                    @Html.TextBoxFor(modelItem => item.Website, new { @class = "profile-textbox" })
-
-                    <h4>@Html.DisplayNameFor(model => model.LoginName):</h4>
-                    @Html.TextBoxFor(modelItem => item.LoginName, new { @class = "profile-textbox" })
-
-                    <h4>@Html.DisplayNameFor(model => model.Password):</h4>
-                    @Html.TextBoxFor(modelItem => item.Password, new { @class = "profile-textbox" })
-
-                    <h4>@Html.DisplayNameFor(model => model.SignUpEmail):</h4>
-                    @Html.TextBoxFor(modelItem => item.SignUpEmail, new { @class = "profile-textbox" })
-
-                    <h4>@Html.DisplayNameFor(model => model.AgeOfPassword):</h4>
-                    @Html.TextBoxFor(modelItem => item.AgeOfPassword, new { @class = "profile-textbox" })
-                </div>
-
-                @Html.ValidationSummary(false, "", new { @class = "form-message" })
+            <div class="profile-title-bar">
+                <button class="profile-title profile-view" onclick="onProfileClick(this, 2)">
+                    @Html.DisplayFor(m => item.Title)
+                </button>
             </div>
+            @Html.Partial("_DetailsPartial", item)
+            @Html.Partial("_EditPartial", item)
         </li>
     }
 </ul>
 
 @section Scripts {
-    <script>
-        const details = document.querySelectorAll('.profile-detail-group');
-        const titleBtns = document.querySelectorAll('.profile-title');
-        let currentBtn = null;
-        let currentDtls;
+    <script type="text/javascript">
+        // More dynamic //
+
+        let lastButtonClicked;
+        let lastProfileOpened;
+        let isEditing = false;
+
+        function onProfileClick(button, liParentOffset = 2) {
+            if (isEditing) {
+                return;
+            }
+
+            // Close previous profile
+            if (lastProfileOpened != null) {
+                let view = lastProfileOpened.querySelector('.profile-detail-group')
+                toggleView(view);
+            }
+
+            if (lastButtonClicked != button) {
+                // Read event
+                lastButtonClicked = button;
+                lastProfileOpened = lastButtonClicked;
+                // Assign proper parent element
+                for (let i = 0; i < liParentOffset; i++) {
+                    lastProfileOpened = lastProfileOpened.parentElement;
+                }
+
+                let view = lastProfileOpened.querySelector('.profile-detail-group')
+                toggleView(view);
+            }
+            else {
+                lastProfileOpened = null;
+                lastButtonClicked = null;
+            }
+        };
+
+        function onEditClick() {
+            const detailView = lastProfileOpened.querySelector('.profile-detail-group');
+            const editView = lastProfileOpened.querySelector('.profile-edit-group');
+
+            changeViews(editView, detailView);
+            isEditing = true;
+        }
+
+        function onCancelEditClick() {
+            const detailView = lastProfileOpened.querySelector('.profile-detail-group');
+            const editView = lastProfileOpened.querySelector('.profile-edit-group');
+
+            changeViews(detailView, editView);
+            isEditing = false;
+        }
+
+        function toggleView(view) {
+            if (view.style.maxHeight == 0 || view.style.maxHeight == '0px') {
+                view.style.maxHeight = view.scrollHeight + 'px';
+            }
+            else {
+                view.style.maxHeight = 0;
+            }
+        }
+
+        function changeViews(openView, closeView) {
+            openView.style.maxHeight = openView.scrollHeight + 'px';
+            closeView.style.maxHeight = 0;
+        }
+
+        // Collapsable Profile Items //
+        // New Profile
+        const addBtn = document.querySelector('.profile-add');
+        const addForm = document.querySelector('.profile-create-group');
+        let isOpen = false;
+
+        addBtn.addEventListener('click', (e) => {
+            if (isOpen) {
+                addForm.style.maxHeight = null;
+            }
+            else {
+                addForm.style.maxHeight = addForm.scrollHeight + 'px';
+            }
+            isOpen = !isOpen;
+        })
+
+        // Existing Profiles
+        const detailViews = document.querySelectorAll('.profile-detail-group');
+        const editViews = document.querySelectorAll('.profile-edit-group');
 
         collapseAll();
 
-        titleBtns.forEach((btn, index) => btn.addEventListener('click', (e) => {
-            
-            if (currentBtn != null) {
-                // Animate transition
-                currentDtls.style.maxHeight = null;
-                // Turn off displays
-                currentBtn.style.border = 'none';
-            }
-
-            if (currentBtn != btn) {
-                currentBtn = btn;
-                currentDtls = details[index];
-                // Turn on displays
-                currentBtn.style.border = 'solid 4px var(--accent-color)';
-                currentDtls.style.display = 'flex';
-                // Animate transition
-                currentDtls.style.maxHeight = currentDtls.scrollHeight + 'px';
-            }
-            else {
-                currentBtn = null;
-            }
-        }));
-
+        // Functions
         function collapseAll() {
-            details.forEach((item) => {
+            addForm.style.maxHeight = null;
+
+            detailViews.forEach((item) => {
+                item.style.maxHeight = null;
+            });
+
+            editViews.forEach((item) => {
                 item.style.maxHeight = null;
             });
         };
