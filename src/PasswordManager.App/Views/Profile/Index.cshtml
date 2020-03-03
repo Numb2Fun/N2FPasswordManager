@@ -10,7 +10,7 @@
 <ul class="profile-list">
     <li>
         <div class="profile-title-bar">
-            <button class="profile-title profile-add">
+            <button class="profile-title profile-add" onclick="onProfileClick(this, 2)">
                 + Add New Profile
             </button>
         </div>
@@ -30,108 +30,3 @@
         </li>
     }
 </ul>
-
-@section Scripts {
-    <script type="text/javascript">
-        // More dynamic //
-
-        let lastButtonClicked;
-        let lastProfileOpened;
-        let isEditing = false;
-
-        function onProfileClick(button, liParentOffset = 2) {
-            if (isEditing) {
-                return;
-            }
-
-            // Close previous profile
-            if (lastProfileOpened != null) {
-                let view = lastProfileOpened.querySelector('.profile-detail-group')
-                toggleView(view);
-            }
-
-            if (lastButtonClicked != button) {
-                // Read event
-                lastButtonClicked = button;
-                lastProfileOpened = lastButtonClicked;
-                // Assign proper parent element
-                for (let i = 0; i < liParentOffset; i++) {
-                    lastProfileOpened = lastProfileOpened.parentElement;
-                }
-
-                let view = lastProfileOpened.querySelector('.profile-detail-group')
-                toggleView(view);
-            }
-            else {
-                lastProfileOpened = null;
-                lastButtonClicked = null;
-            }
-        };
-
-        function onEditClick() {
-            const detailView = lastProfileOpened.querySelector('.profile-detail-group');
-            const editView = lastProfileOpened.querySelector('.profile-edit-group');
-
-            changeViews(editView, detailView);
-            isEditing = true;
-        }
-
-        function onCancelEditClick() {
-            const detailView = lastProfileOpened.querySelector('.profile-detail-group');
-            const editView = lastProfileOpened.querySelector('.profile-edit-group');
-
-            changeViews(detailView, editView);
-            isEditing = false;
-        }
-
-        function toggleView(view) {
-            if (view.style.maxHeight == 0 || view.style.maxHeight == '0px') {
-                view.style.maxHeight = view.scrollHeight + 'px';
-            }
-            else {
-                view.style.maxHeight = 0;
-            }
-        }
-
-        function changeViews(openView, closeView) {
-            openView.style.maxHeight = openView.scrollHeight + 'px';
-            closeView.style.maxHeight = 0;
-        }
-
-        // Collapsable Profile Items //
-        // New Profile
-        const addBtn = document.querySelector('.profile-add');
-        const addForm = document.querySelector('.profile-create-group');
-        let isOpen = false;
-
-        addBtn.addEventListener('click', (e) => {
-            if (isOpen) {
-                addForm.style.maxHeight = null;
-            }
-            else {
-                addForm.style.maxHeight = addForm.scrollHeight + 'px';
-            }
-            isOpen = !isOpen;
-        })
-
-        // Existing Profiles
-        const detailViews = document.querySelectorAll('.profile-detail-group');
-        const editViews = document.querySelectorAll('.profile-edit-group');
-
-        collapseAll();
-
-        // Functions
-        function collapseAll() {
-            addForm.style.maxHeight = null;
-
-            detailViews.forEach((item) => {
-                item.style.maxHeight = null;
-            });
-
-            editViews.forEach((item) => {
-                item.style.maxHeight = null;
-            });
-        };
-
-    </script>
-}

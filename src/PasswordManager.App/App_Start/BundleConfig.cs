@@ -25,6 +25,9 @@ namespace PasswordManager.App
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       //"~/Content/bootstrap.css",
                       "~/Content/base-theme.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/main").Include(
+                        "~/Scripts/main.js"));
         }
     }
 }
