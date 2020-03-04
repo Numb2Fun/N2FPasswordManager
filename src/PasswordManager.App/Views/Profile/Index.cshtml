@@ -1,4 +1,4 @@
-﻿@model IEnumerable<PasswordManager.App.Models.ProfileViewModel>
+﻿@model Dictionary<string, List<PasswordManager.App.Models.ProfileViewModel>>
 
 @{
     ViewBag.Title = "Index";
@@ -17,16 +17,31 @@
         @Html.Partial("_CreatePartial", new PasswordManager.App.Models.ProfileViewModel())
     </li>
 
-    @foreach (var item in Model)
+    @foreach (var pair in Model)
     {
-        <li>
-            <div class="profile-title-bar">
-                <button class="profile-title profile-view" onclick="onProfileClick(this, 2)">
-                    @Html.DisplayFor(m => item.Title)
-                </button>
-            </div>
-            @Html.Partial("_DetailsPartial", item)
-            @Html.Partial("_EditPartial", item)
-        </li>
+        if (pair.Value.Count > 0)
+        {
+            <li>
+                <div class="category-bar">
+                    <button class="category-btn" onclick="onCategoryClick(this, 2)">
+                        <span class="category-title">CATEGORY/</span> @Html.DisplayFor(m => pair.Key)
+                    </button>
+                </div>
+                <ul class="category-group">
+                    @foreach (var item in pair.Value)
+                    {
+                        <li>
+                            <div class="profile-title-bar">
+                                <button class="profile-title profile-view" onclick="onProfileClick(this, 2)">
+                                    @Html.DisplayFor(m => item.Title)
+                                </button>
+                            </div>
+                            @Html.Partial("_DetailsPartial", item)
+                            @Html.Partial("_EditPartial", item)
+                        </li>
+                    }
+                </ul>
+            </li>
+        }
     }
 </ul>

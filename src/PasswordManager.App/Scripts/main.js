@@ -7,6 +7,16 @@ let editForm; // Profile details for value reversion in case of edit cancel
 
 collapseAll();
 
+function onCategoryClick(button, liParentOffset = 2) {
+    let listParent = button;
+    for (let i = 0; i < liParentOffset; i++) {
+        listParent = listParent.parentElement;
+    }
+
+    const group = listParent.querySelector('.category-group');
+    toggleView(group);
+}
+
 // param: liParentOffset => Indicates steps from button to reach parent li element
 function onProfileClick(button, liParentOffset = 2) {
     // Cancel any in progress editing

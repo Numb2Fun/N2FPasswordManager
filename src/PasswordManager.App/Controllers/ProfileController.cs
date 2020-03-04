@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNet.Identity;
 using PasswordManager.App.Models;
 using PasswordManager.Library.DataAccess;
+using PasswordManager.Library.Enums;
 using PasswordManager.Library.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace PasswordManager.App.Controllers
@@ -37,15 +36,31 @@ namespace PasswordManager.App.Controllers
             }
 
             List<ProfileViewModel> profiles = new List<ProfileViewModel>();
+            Dictionary<string, List<ProfileViewModel>> profilesByCat = new Dictionary<string, List<ProfileViewModel>>();
+
             string userId = User.Identity.GetUserId();
             IEnumerable<ProfileDataModel> data = _profileData.GetProfilesForUser(userId);
 
-            foreach (var m in data)
+            foreach (var name in Enum.GetNames(typeof(ProfileCategory)))
             {
-                profiles.Add(new ProfileViewModel(m));
+                profilesByCat.Add(name, new List<ProfileViewModel>());
             }
 
-            return View(profiles);
+            foreach (var m in data)
+            {
+                var profile = new ProfileViewModel(m);
+                string category = Enum.GetName(typeof(ProfileCategory), profile.Category);
+
+                if (profilesByCat.ContainsKey(category) == false)
+                {
+                    profile.Category = ProfileCategory.None;
+                    category = Enum.GetName(typeof(ProfileCategory), profile.Category);
+                }
+
+                profilesByCat[category].Add(profile);
+            }
+
+            return View(profilesByCat);
         }
 
         // GET: Profile/Edit/5
