@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNet.Identity;
 using PasswordManager.App.Models;
 using PasswordManager.Library.DataAccess;
+using PasswordManager.Library.Enums;
 using PasswordManager.Library.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace PasswordManager.App.Controllers
@@ -13,7 +12,6 @@ namespace PasswordManager.App.Controllers
     public class ProfileController : Controller
     {
         private readonly IProfileData _profileData;
-        private string passwordBeforeEdit;
 
         public ProfileController()
         {
@@ -31,28 +29,53 @@ namespace PasswordManager.App.Controllers
         /// <returns>Index view with list of ProfileModels</returns>
         public ActionResult Index()
         {
-            List<ProfileModel> profiles = new List<ProfileModel>();
+            if (User.Identity.IsAuthenticated == false)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            Dictionary<string, List<ProfileViewModel>> profilesByCat = new Dictionary<string, List<ProfileViewModel>>();
+            List<SelectListItem> categoryItems = new List<SelectListItem>();
+
+            // Retrieve all profiles for logged user
             string userId = User.Identity.GetUserId();
             IEnumerable<ProfileDataModel> data = _profileData.GetProfilesForUser(userId);
 
-            foreach (var m in data)
+            // Set up categories from enum and assign in ViewBag for use in view dropdowns
+            foreach (var name in Enum.GetNames(typeof(ProfileCategory)))
             {
-                profiles.Add(new ProfileModel(m));
+                profilesByCat.Add(name, new List<ProfileViewModel>());
+
+                categoryItems.Add(new SelectListItem()
+                {
+                    Text = name,
+                    Value = ((int)(ProfileCategory)Enum.Parse(typeof(ProfileCategory), name)).ToString()
+                });
             }
 
-            return View(profiles);
-        }
+            ViewBag.categoryItems = categoryItems;
 
-        // GET: Profile/Edit/5
-        public ActionResult Edit(ProfileModel profile)
-        {
-            profile.PreviousPassword = profile.Password;
-            return View(profile);
+            // Create view models and add them to lists by category
+            foreach (var m in data)
+            {
+                var profile = new ProfileViewModel(m);
+                string category = Enum.GetName(typeof(ProfileCategory), profile.Category);
+
+                if (profilesByCat.ContainsKey(category) == false)
+                {
+                    profile.Category = ProfileCategory.None;
+                    category = Enum.GetName(typeof(ProfileCategory), profile.Category);
+                }
+
+                profilesByCat[category].Add(profile);
+            }
+
+            return View(profilesByCat);
         }
 
         // POST: Profile/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, ProfileModel profile)
+        public ActionResult Edit(int id, ProfileViewModel profile)
         {
             if (ModelState.IsValid == false)
                 return View();
@@ -79,18 +102,12 @@ namespace PasswordManager.App.Controllers
             return RedirectToAction("Index");
         }
 
-        // GET: Profile/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
         // POST: Profile/Create
         [HttpPost]
-        public ActionResult Create(ProfileModel profile)
+        public ActionResult Create(ProfileViewModel profile)
         {
             if (ModelState.IsValid == false)
-                return View();
+                return PartialView();
 
             string userId = User.Identity.GetUserId();
             int catId = (int)profile.Category;
@@ -112,7 +129,7 @@ namespace PasswordManager.App.Controllers
         }
 
         // GET: Profile/Delete/5
-        public ActionResult Delete(ProfileModel profile)
+        public ActionResult Delete(ProfileViewModel profile)
         {
             return View(profile);
         }

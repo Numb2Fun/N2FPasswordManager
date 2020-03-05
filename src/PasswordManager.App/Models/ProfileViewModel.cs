@@ -5,24 +5,40 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PasswordManager.App.Models
 {
-    public class ProfileModel
+    public class ProfileViewModel
     {
         public int Id { get; set; }
         public ProfileCategory Category { get; set; }
+
         [Required]
         public string Title { get; set; }
         public string Website { get; set; }
+
+        [Display(Name = "Login Name")]
         public string LoginName { get; set; }
         public string Password { get; set; }
+
+        [Display(Name = "Sign Up Email")]
         public string SignUpEmail { get; set; }
         public DateTime LastUpdated { get; set; }
-
         public string PreviousPassword { get; set; }
+
+        [Display(Name = "Age of Password")]
         public string AgeOfPassword
         {
             get
             {
-                string age = $"{(DateTime.Now - LastUpdated).Days.ToString()} days";
+                int days = (DateTime.Now - LastUpdated).Days;
+                string age;
+                if (days < 31)
+                {
+                    age = $"{days.ToString()} day(s)";
+                }
+                else
+                {
+                    age = $"{(days / 30f).ToString("0.0")} month(s)";
+                }
+
                 return age;
             }
         }
@@ -35,12 +51,12 @@ namespace PasswordManager.App.Models
             }
         }
 
-        public ProfileModel()
+        public ProfileViewModel()
         {
             //Model requires parameterless constructor for view binding
         }
 
-        public ProfileModel(ProfileDataModel data)
+        public ProfileViewModel(ProfileDataModel data)
         {
             Id = data.Id;
             Category = (ProfileCategory)data.CategoryId;
@@ -48,6 +64,7 @@ namespace PasswordManager.App.Models
             Website = data.Website;
             LoginName = data.LoginName;
             Password = data.Password;
+            PreviousPassword = data.Password;
             SignUpEmail = data.SignUpEmail;
             LastUpdated = data.LastUpdated;
         }

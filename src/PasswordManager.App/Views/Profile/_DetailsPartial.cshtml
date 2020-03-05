@@ -1,0 +1,26 @@
+﻿@model PasswordManager.App.Models.ProfileViewModel
+
+<div class="profile-detail-group">
+    <div class="profile-details">
+        <h4>@Html.LabelFor(model => model.Website):</h4>
+        <p>@Html.DisplayFor(m => m.Website)</p>
+
+        <h4>@Html.LabelFor(model => model.LoginName):</h4>
+        <p>@Html.DisplayFor(m => m.LoginName)</p>
+
+        <h4>@Html.LabelFor(model => model.Password):</h4>
+        <p>@Html.DisplayFor(m => m.Password)</p>
+
+        <h4>@Html.LabelFor(model => model.SignUpEmail):</h4>
+        <p>@Html.DisplayFor(m => m.SignUpEmail)</p>
+
+        <h4>@Html.LabelFor(model => model.AgeOfPassword):</h4>
+        <p>@Html.DisplayFor(m => m.AgeOfPassword)</p>
+    </div>
+
+    @Html.ValidationSummary(false, "", new { @class = "form-message" })
+
+    <div class="profile-btn-group">
+        <button class="profile-btn edit-btn" onclick="onEditClick()">Edit</button>
+    </div>
+</div>

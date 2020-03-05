@@ -1,0 +1,36 @@
+﻿@model PasswordManager.App.Models.ProfileViewModel
+
+@using (Html.BeginForm("Edit", "Profile", FormMethod.Post, new { @class = "profile-edit-group" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.PreviousPassword)
+    @Html.HiddenFor(model => model.LastUpdated)
+
+    <div class="profile-details">
+        <h4>@Html.LabelFor(model => model.Title):</h4>
+        @Html.EditorFor(m => m.Title,  new { htmlAttributes = new { @class = "profile-textbox" } })
+
+        <h4>@Html.LabelFor(model => model.Category):</h4>
+        @Html.DropDownListFor(m => m.Category, (List<SelectListItem>)ViewBag.categoryItems, new { @class = "profile-textbox" })
+
+        <h4>@Html.LabelFor(model => model.Website):</h4>
+        @Html.EditorFor(m => m.Website,  new { htmlAttributes = new { @class = "profile-textbox" } })
+
+        <h4>@Html.LabelFor(model => model.LoginName):</h4>
+        @Html.EditorFor(m => m.LoginName,  new { htmlAttributes = new { @class = "profile-textbox" } })
+
+        <h4>@Html.LabelFor(model => model.Password):</h4>
+        @Html.EditorFor(m => m.Password,  new { htmlAttributes = new { @class = "profile-textbox" } })
+
+        <h4>@Html.LabelFor(model => model.SignUpEmail):</h4>
+        @Html.EditorFor(m => m.SignUpEmail,  new { htmlAttributes = new { @class = "profile-textbox" } })
+    </div>
+
+    @Html.ValidationSummary(false, "", new { @class = "form-message" })
+
+    <div class="profile-btn-group">
+        <button type="button" class="profile-btn" onclick="onCancelEditClick()">Cancel</button>
+        <input type="submit" value="Save" class="profile-btn save-btn" />
+    </div>
+}
