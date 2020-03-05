@@ -1,4 +1,4 @@
-﻿// Profile List Form Control //
+﻿// Profile List Tab Control //
 
 let lastButtonClicked; // Profile title button used to uncollapse details
 let lastProfileOpened; // Profile parent of button clicked
@@ -6,16 +6,29 @@ let isEditing = false;
 let editForm; // Profile details for value reversion in case of edit cancel
 
 collapseAll();
+linkCategoriesToProfiles();
 
+// Resizes category max-height when child profile tabs are opened/closed
+function linkCategoriesToProfiles() {
+    const groups = document.querySelectorAll('.category-group');
+    groups.forEach(group => {
+        const profiles = group.querySelectorAll('.profile-title');
+        profiles.forEach(profile => {
+            profile.addEventListener('click', e => {
+                const profLi = getParent(profile, 2).querySelector('.profile-edit-group');
+                const newHeight = group.scrollHeight + profLi.scrollHeight;
+                group.style.maxHeight = newHeight + 'px';
+            });
+        });
+    });
+}
+
+// param: liParentOffset => Indicates steps from button to reach parent li element
 function onCategoryClick(button, liParentOffset = 2) {
-    let listParent = button;
-    for (let i = 0; i < liParentOffset; i++) {
-        listParent = listParent.parentElement;
-    }
-
+    const listParent = getParent(button, liParentOffset);
     const group = listParent.querySelector('.category-group');
     toggleView(group);
-}
+};
 
 // param: liParentOffset => Indicates steps from button to reach parent li element
 function onProfileClick(button, liParentOffset = 2) {
@@ -33,11 +46,7 @@ function onProfileClick(button, liParentOffset = 2) {
     if (lastButtonClicked != button) {
         // Read event
         lastButtonClicked = button;
-        lastProfileOpened = lastButtonClicked;
-        // Assign proper parent element
-        for (let i = 0; i < liParentOffset; i++) {
-            lastProfileOpened = lastProfileOpened.parentElement;
-        }
+        lastProfileOpened = getParent(button, liParentOffset);
 
         let view = lastProfileOpened.querySelector('.profile-detail-group')
         openView(view);
@@ -81,6 +90,14 @@ function onCancelEditClick() {
     // Clear validation summary
     const summaryList = editView.querySelector(".form-message").querySelector("ul");
     summaryList.innerHTML = "";
+}
+
+function getParent(item, steps) {
+    let parent = item;
+    for (let i = 0; i < steps; i++) {
+        parent = parent.parentElement;
+    }
+    return parent;
 }
 
 function openView(view) {

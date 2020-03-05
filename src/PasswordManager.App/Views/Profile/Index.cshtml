@@ -19,7 +19,22 @@
 
     @foreach (var pair in Model)
     {
-        if (pair.Value.Count > 0)
+        if (pair.Key == "None")
+        {
+            foreach (var item in pair.Value)
+            {
+                <li>
+                    <div class="profile-title-bar">
+                        <button class="profile-title profile-view" onclick="onProfileClick(this, 2)">
+                            @Html.DisplayFor(m => item.Title)
+                        </button>
+                    </div>
+                    @Html.Partial("_DetailsPartial", item)
+                    @Html.Partial("_EditPartial", item)
+                </li>
+            }
+        }
+        else if (pair.Value.Count > 0)
         {
             <li>
                 <div class="category-bar">

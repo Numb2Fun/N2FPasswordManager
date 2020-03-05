@@ -12,7 +12,6 @@ namespace PasswordManager.App.Controllers
     public class ProfileController : Controller
     {
         private readonly IProfileData _profileData;
-        private string passwordBeforeEdit;
 
         public ProfileController()
         {
@@ -35,17 +34,28 @@ namespace PasswordManager.App.Controllers
                 return RedirectToAction("Login", "Account");
             }
 
-            List<ProfileViewModel> profiles = new List<ProfileViewModel>();
             Dictionary<string, List<ProfileViewModel>> profilesByCat = new Dictionary<string, List<ProfileViewModel>>();
+            List<SelectListItem> categoryItems = new List<SelectListItem>();
 
+            // Retrieve all profiles for logged user
             string userId = User.Identity.GetUserId();
             IEnumerable<ProfileDataModel> data = _profileData.GetProfilesForUser(userId);
 
+            // Set up categories from enum and assign in ViewBag for use in view dropdowns
             foreach (var name in Enum.GetNames(typeof(ProfileCategory)))
             {
                 profilesByCat.Add(name, new List<ProfileViewModel>());
+
+                categoryItems.Add(new SelectListItem()
+                {
+                    Text = name,
+                    Value = ((int)(ProfileCategory)Enum.Parse(typeof(ProfileCategory), name)).ToString()
+                });
             }
 
+            ViewBag.categoryItems = categoryItems;
+
+            // Create view models and add them to lists by category
             foreach (var m in data)
             {
                 var profile = new ProfileViewModel(m);
@@ -61,13 +71,6 @@ namespace PasswordManager.App.Controllers
             }
 
             return View(profilesByCat);
-        }
-
-        // GET: Profile/Edit/5
-        public ActionResult Edit(ProfileViewModel profile)
-        {
-            profile.PreviousPassword = profile.Password;
-            return View(profile);
         }
 
         // POST: Profile/Edit/5
@@ -97,12 +100,6 @@ namespace PasswordManager.App.Controllers
             _profileData.UpdateProfile(data);
 
             return RedirectToAction("Index");
-        }
-
-        // GET: Profile/Create
-        public ActionResult Create()
-        {
-            return View();
         }
 
         // POST: Profile/Create

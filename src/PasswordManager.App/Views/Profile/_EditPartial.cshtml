@@ -11,6 +11,9 @@
         <h4>@Html.LabelFor(model => model.Title):</h4>
         @Html.EditorFor(m => m.Title, new { @class = "profile-textbox" })
 
+        <h4>@Html.LabelFor(model => model.Category):</h4>
+        @Html.DropDownListFor(m => m.Category, (List<SelectListItem>)ViewBag.categoryItems, new { @class = "profile-textbox" })
+
         <h4>@Html.LabelFor(model => model.Website):</h4>
         @Html.EditorFor(m => m.Website, new { @class = "profile-textbox" })
 
