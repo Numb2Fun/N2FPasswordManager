@@ -1,4 +1,9 @@
-﻿
+﻿button,
+input {
+    font-family: 'Share Tech', sans-serif;
+    font-weight: normal;
+}
+
 :root {
     --banner-width: 256px;
     --accent-color: #008000;
@@ -43,7 +48,7 @@ textarea {
     max-width: 280px;
 }
 
-/* Category */
+/*#region Category */
 .category-bar {
     display: flex;
     align-items: center;
@@ -56,7 +61,7 @@ textarea {
     width: 100%;
     height: 48px;
     border-radius: 5px;
-    font-size: 26px;
+    font-size: 28px;
     border: none;
     text-indent: 12px;
     text-align: left;
@@ -71,7 +76,7 @@ textarea {
 }
 
 .category-title {
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .category-group {
@@ -81,8 +86,9 @@ textarea {
     list-style-type: none;
     margin-top: 16px;
 }
+/*#endregion */
 
-/* Profiles */
+/*#region Profiles */
 .profile-list {
     width: 720px;
     margin: 0 0 0 50px;
@@ -132,8 +138,7 @@ textarea {
     color: var(--primary-text);
     width: 100px;
     height: 40px;
-    font-size: 20px;
-    font-weight: bold;
+    font-size: 24px;
 }
 
 .profile-btn:focus {
@@ -145,7 +150,6 @@ textarea {
     color: var(--primary-background);
 }
 
-.profile-create-group,
 .profile-detail-group,
 .profile-edit-group {
     max-height: 0;
@@ -172,20 +176,25 @@ textarea {
     color: var(--primary-text);
 }
 
-.profile-details h3 {
+.profile-details p {
     text-align: left;
     color: var(--secondary-text);
+    font-size: 28px;
 }
 
 .profile-details * {
     margin: 0;
 }
 
-.profile-
-
 .profile-textbox {
-    
+    font-family: 'Share Tech', sans-serif;
+    border: 1px solid var(--accent-color);
+    border-radius: 4px;
+    font-size: 22px;
+    background: var(--primary-text);
+    color: var(--dark-text);
 }
+/*#endregion*/
 
 /* Content */
 .content-container {
@@ -193,7 +202,7 @@ textarea {
     width: 80vw;
 }
 
-/* Navbar */
+/*#region Navbar */
 .nav-background,
 .nav-background a {
     background-color: var(--primary-background);
@@ -234,8 +243,9 @@ textarea {
     background-color: var(--secondary-text);
     color: var(--secondary-background);
 }
+/*#endregion */
 
-/* Login Banner */
+/*#region Login Banner */
 .banner-background {
     background-color: var(--accent-background);
 }
@@ -280,17 +290,9 @@ textarea {
     display: grid;
 }
 
-.form-label {
-    
-}
-
 .form-textbox {
     color: #000;
     border-radius: 5px;
-}
-
-.form-message {
-    
 }
 
 .checkbox-group {
@@ -323,3 +325,22 @@ textarea {
 .form-link:hover {
     color: var(--secondary-text);
 }
+/*#endregion */
+
+/*#region Sizing Adjustments */
+
+@media (max-width: 900px) {
+    .profile-list {
+        width: 95%;
+        margin: 0;
+    }
+
+    .profile-details {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-details h4 {
+        text-align: left;
+    }
+}
+/*#endregion */

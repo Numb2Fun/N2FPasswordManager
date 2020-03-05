@@ -3,19 +3,19 @@
 <div class="profile-detail-group">
     <div class="profile-details">
         <h4>@Html.LabelFor(model => model.Website):</h4>
-        <h3>@Html.DisplayFor(m => m.Website)</h3>
+        <p>@Html.DisplayFor(m => m.Website)</p>
 
         <h4>@Html.LabelFor(model => model.LoginName):</h4>
-        <h3>@Html.DisplayFor(m => m.LoginName)</h3>
+        <p>@Html.DisplayFor(m => m.LoginName)</p>
 
         <h4>@Html.LabelFor(model => model.Password):</h4>
-        <h3>@Html.DisplayFor(m => m.Password)</h3>
+        <p>@Html.DisplayFor(m => m.Password)</p>
 
         <h4>@Html.LabelFor(model => model.SignUpEmail):</h4>
-        <h3>@Html.DisplayFor(m => m.SignUpEmail)</h3>
+        <p>@Html.DisplayFor(m => m.SignUpEmail)</p>
 
         <h4>@Html.LabelFor(model => model.AgeOfPassword):</h4>
-        <h3>@Html.DisplayFor(m => m.AgeOfPassword)</h3>
+        <p>@Html.DisplayFor(m => m.AgeOfPassword)</p>
     </div>
 
     @Html.ValidationSummary(false, "", new { @class = "form-message" })

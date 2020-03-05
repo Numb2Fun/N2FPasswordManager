@@ -67,6 +67,7 @@ function onEditClick() {
     // Save profile values for revert on cancel
     editForm = {
         Title: editView.querySelector("#Title").value,
+        Category: editView.querySelector("#Category").value,
         Website: editView.querySelector("#Website").value,
         LoginName: editView.querySelector("#LoginName").value,
         Password: editView.querySelector("#Password").value,
@@ -83,6 +84,7 @@ function onCancelEditClick() {
     isEditing = false;
     // Revert values in textboxes
     editView.querySelector("#Title").value = editForm.Title;
+    editView.querySelector("#Category").value = editForm.Category;
     editView.querySelector("#Website").value = editForm.Website;
     editView.querySelector("#LoginName").value = editForm.LoginName;
     editView.querySelector("#Password").value = editForm.Password;

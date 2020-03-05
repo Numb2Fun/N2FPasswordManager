@@ -9,22 +9,22 @@
 
     <div class="profile-details">
         <h4>@Html.LabelFor(model => model.Title):</h4>
-        @Html.EditorFor(m => m.Title, new { @class = "profile-textbox" })
+        @Html.EditorFor(m => m.Title,  new { htmlAttributes = new { @class = "profile-textbox" } })
 
         <h4>@Html.LabelFor(model => model.Category):</h4>
         @Html.DropDownListFor(m => m.Category, (List<SelectListItem>)ViewBag.categoryItems, new { @class = "profile-textbox" })
 
         <h4>@Html.LabelFor(model => model.Website):</h4>
-        @Html.EditorFor(m => m.Website, new { @class = "profile-textbox" })
+        @Html.EditorFor(m => m.Website,  new { htmlAttributes = new { @class = "profile-textbox" } })
 
         <h4>@Html.LabelFor(model => model.LoginName):</h4>
-        @Html.EditorFor(m => m.LoginName, new { @class = "profile-textbox" })
+        @Html.EditorFor(m => m.LoginName,  new { htmlAttributes = new { @class = "profile-textbox" } })
 
         <h4>@Html.LabelFor(model => model.Password):</h4>
-        @Html.EditorFor(m => m.Password, new { @class = "profile-textbox" })
+        @Html.EditorFor(m => m.Password,  new { htmlAttributes = new { @class = "profile-textbox" } })
 
         <h4>@Html.LabelFor(model => model.SignUpEmail):</h4>
-        @Html.EditorFor(m => m.SignUpEmail, new { @class = "profile-textbox" })
+        @Html.EditorFor(m => m.SignUpEmail,  new { htmlAttributes = new { @class = "profile-textbox" } })
     </div>
 
     @Html.ValidationSummary(false, "", new { @class = "form-message" })
