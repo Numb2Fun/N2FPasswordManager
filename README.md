@@ -2,10 +2,10 @@
 This web app is responsible to storing, generating, and managing user passwords for accounts across the internet.
 
 ## Component Model
-![Component Model](./Design/ComponentModel_01.png)
+![Component Model](./design/ComponentModel_01.png)
 
 ## Database Model
-![DB Model](./Design/EntityRelationship_01.png)
+![DB Model](./design/EntityRelationship_01.png)
 
 ## Login Page Mockup
 ![Login](./design/LandingPage_MockUp_01.png)
