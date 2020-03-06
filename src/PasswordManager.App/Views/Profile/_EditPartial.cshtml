@@ -9,7 +9,7 @@
 
     <div class="profile-details">
         <h4>@Html.LabelFor(model => model.Title):</h4>
-        @Html.EditorFor(m => m.Title,  new { htmlAttributes = new { @class = "profile-textbox" } })
+        @Html.EditorFor(m => m.Title,  new { htmlAttributes = new { @class = "profile-textbox profile-titlebox", @placeholder = "Title Required" } })
 
         <h4>@Html.LabelFor(model => model.Category):</h4>
         @Html.DropDownListFor(m => m.Category, (List<SelectListItem>)ViewBag.categoryItems, new { @class = "profile-textbox" })
@@ -27,10 +27,10 @@
         @Html.EditorFor(m => m.SignUpEmail,  new { htmlAttributes = new { @class = "profile-textbox" } })
     </div>
 
-    @Html.ValidationSummary(false, "", new { @class = "form-message" })
+    @*Html.ValidationSummary(false, "", new { @class = "form-message" })*@
 
     <div class="profile-btn-group">
         <button type="button" class="profile-btn" onclick="onCancelEditClick()">Cancel</button>
-        <input type="submit" value="Save" class="profile-btn save-btn" />
+        <input type="submit" value="Save" class="profile-btn profile-submit" />
     </div>
 }

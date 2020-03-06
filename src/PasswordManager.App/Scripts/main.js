@@ -7,6 +7,33 @@ let editForm; // Profile details for value reversion in case of edit cancel
 
 collapseAll();
 linkCategoriesToProfiles();
+linkProfileTitlesToSubmitBtns();
+
+// When input for title textbox changes, the submit button is toggled 'disabled' depending on whether input exists
+function linkProfileTitlesToSubmitBtns() {
+    const groups = Array.from(document.querySelectorAll('.profile-edit-group'));
+
+    groups.forEach(group => {
+        const titleBox = group.querySelector('.profile-titlebox');
+        const submitBtn = group.querySelector('.profile-submit');
+        
+        titleBox.addEventListener('input', e => {
+            checkTextboxForValue(titleBox, submitBtn);
+        });
+
+        checkTextboxForValue(titleBox, submitBtn)
+    });
+}
+
+// Disables input if textbox is empty
+function checkTextboxForValue(textbox, inputBtn) {
+    if (textbox.value === "" || textbox.value.trim() === "") {
+        inputBtn.disabled = true;
+    }
+    else {
+        inputBtn.disabled = false;
+    }
+}
 
 // Resizes category max-height when child profile tabs are opened/closed
 function linkCategoriesToProfiles() {
@@ -23,6 +50,7 @@ function linkCategoriesToProfiles() {
     });
 }
 
+// Toggles visibility of profiles under specific category
 // param: liParentOffset => Indicates steps from button to reach parent li element
 function onCategoryClick(button, liParentOffset = 2) {
     const listParent = getParent(button, liParentOffset);
@@ -30,6 +58,7 @@ function onCategoryClick(button, liParentOffset = 2) {
     toggleView(group);
 };
 
+// Toggles visibility of clicked profile and previouse profile
 // param: liParentOffset => Indicates steps from button to reach parent li element
 function onProfileClick(button, liParentOffset = 2) {
     // Cancel any in progress editing
@@ -89,9 +118,9 @@ function onCancelEditClick() {
     editView.querySelector("#LoginName").value = editForm.LoginName;
     editView.querySelector("#Password").value = editForm.Password;
     editView.querySelector("#SignUpEmail").value = editForm.SignUpEmail;
-    // Clear validation summary
-    const summaryList = editView.querySelector(".form-message").querySelector("ul");
-    summaryList.innerHTML = "";
+    // Clear validation summary -> Validation Summary Not Currently in HTML
+    //const summaryList = editView.querySelector(".form-message").querySelector("ul");
+    //summaryList.innerHTML = "";
 }
 
 function getParent(item, steps) {
