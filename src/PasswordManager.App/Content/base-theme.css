@@ -1,9 +1,4 @@
-﻿button,
-input {
-    font-family: 'Share Tech', sans-serif;
-    font-weight: normal;
-}
-
+﻿
 :root {
     --banner-width: 256px;
     --accent-color: #008000;
@@ -27,6 +22,14 @@ body {
 h2, h3, h4, h5 {
     font-weight: normal;
 }
+
+label,
+button,
+input {
+    font-family: 'Share Tech', sans-serif;
+    font-weight: normal;
+}
+
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
@@ -65,10 +68,6 @@ textarea {
     border: none;
     text-indent: 12px;
     text-align: left;
-}
-
-.category-btn:focus {
-    outline-color: var(--accent-color);
 }
 
 .category-btn:hover {
@@ -115,10 +114,6 @@ textarea {
     text-align: left;
 }
 
-.profile-title:focus {
-    outline-color: var(--accent-color);
-}
-
 .profile-title:hover {
     border: solid 4px var(--accent-color) !important;
 }
@@ -139,10 +134,6 @@ textarea {
     min-width: 100px;
     min-height: 40px;
     font-size: 24px;
-}
-
-.profile-btn:focus {
-    outline-color: var(--accent-color);
 }
 
 .profile-btn:hover {
@@ -191,8 +182,8 @@ textarea {
     border: 1px solid var(--accent-color);
     border-radius: 4px;
     font-size: 22px;
-    background: var(--primary-text);
-    color: var(--dark-text);
+    background: var(--primary-text) !important;
+    color: var(--dark-text) !important;
 }
 /*#endregion*/
 
@@ -358,4 +349,8 @@ textarea {
 :disabled:hover {
     background-color: transparent;
     color: var(--primary-text);
+}
+
+:focus {
+    outline-color: var(--accent-color);
 }
