@@ -13,20 +13,22 @@
 
     <div class="form-item-group">
         @Html.LabelFor(m => m.Email, new { @class = "form-lable" })
-        @Html.TextBoxFor(m => m.Email, new { @class = "form-textbox" })
+        @Html.TextBoxFor(m => m.Email, new { @class = "profile-textbox" })
     </div>
 
     <div class="form-item-group">
         @Html.LabelFor(m => m.Password, new { @class = "form-label" })
-        @Html.PasswordFor(m => m.Password, new { @class = "form-textbox" })
+        @Html.PasswordFor(m => m.Password, new { @class = "profile-textbox" })
     </div>
 
     <div class="form-item-group">
         @Html.LabelFor(m => m.ConfirmPassword, new { @class = "form-label" })
-        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-textbox" })
+        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "profile-textbox" })
     </div>
 
     <input type="submit" class="form-btn" value="Register" />
+
+    @Html.ActionLink("Back to login", "Login", null, new { @class = "form-link" })
 }
 
 @section Scripts {
