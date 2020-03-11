@@ -1,0 +1,5 @@
+﻿INSERT INTO [dbo].[Categories] ([Id], [Name]) VALUES (0, N'None')
+INSERT INTO [dbo].[Categories] ([Id], [Name]) VALUES (1, N'Personal')
+INSERT INTO [dbo].[Categories] ([Id], [Name]) VALUES (2, N'Work')
+INSERT INTO [dbo].[Categories] ([Id], [Name]) VALUES (3, N'Entertainment')
+INSERT INTO [dbo].[Categories] ([Id], [Name]) VALUES (4, N'Financial')

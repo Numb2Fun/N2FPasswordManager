@@ -23,7 +23,7 @@ namespace PasswordManager.Library.DataAccess
             IEnumerable<ProfileDataModel> data;
             object sqlParams = new { @userId = userId };
 
-            data = _dataAccess.LoadData<ProfileDataModel>(DboNames.spGetProfilesByUser, DboNames.dboName, sqlParams);
+            data = _dataAccess.LoadData<ProfileDataModel>(DboNames.spGetProfilesByUser, DboNames.dboNameAzure, sqlParams);
 
             return data;
         }
@@ -41,7 +41,7 @@ namespace PasswordManager.Library.DataAccess
                 @signUpEmail = data.SignUpEmail
             };
 
-            _dataAccess.SaveData(DboNames.spInsertProfileByUser, DboNames.dboName, sqlParams);
+            _dataAccess.SaveData(DboNames.spInsertProfileByUser, DboNames.dboNameLocal, sqlParams);
         }
 
         public void UpdateProfile(ProfileDataModel data)
@@ -58,12 +58,12 @@ namespace PasswordManager.Library.DataAccess
                 @lastUpdated = data.LastUpdated
             };
 
-            _dataAccess.SaveData(DboNames.spUpdateProfile, DboNames.dboName, sqlParams);
+            _dataAccess.SaveData(DboNames.spUpdateProfile, DboNames.dboNameLocal, sqlParams);
         }
 
         public void DeleteProfile(int id)
         {
-            _dataAccess.SaveData(DboNames.spDeleteProfile, DboNames.dboName, new { @id = id });
+            _dataAccess.SaveData(DboNames.spDeleteProfile, DboNames.dboNameLocal, new { @id = id });
         }
     }
 }

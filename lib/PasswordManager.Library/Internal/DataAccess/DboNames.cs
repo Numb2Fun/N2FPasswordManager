@@ -6,7 +6,8 @@ namespace PasswordManager.Library.Internal.DataAccess
 {
     internal class DboNames
     {
-        public const string dboName = "PMData";
+        public const string dboNameLocal = "PMData";
+        public const string dboNameAzure = "AzurePasswordManagerData";
 
         public const string spGetAllUsers = "dbo.spUser_GetAll";
         public const string spGetProfilesByUser = "dbo.spProfiles_GetForUser";
