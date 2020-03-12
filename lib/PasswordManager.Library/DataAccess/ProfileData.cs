@@ -1,11 +1,7 @@
 ﻿using PasswordManager.Library.Internal.DataAccess;
+using PasswordManager.Library.Internal.Encryption;
 using PasswordManager.Library.Models;
-using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PasswordManager.Library.DataAccess
 {
@@ -20,16 +16,23 @@ namespace PasswordManager.Library.DataAccess
 
         public IEnumerable<ProfileDataModel> GetProfilesForUser(string userId)
         {
-            IEnumerable<ProfileDataModel> data;
             object sqlParams = new { @userId = userId };
 
-            data = _dataAccess.LoadData<ProfileDataModel>(DboNames.spGetProfilesByUser, DboNames.dboName, sqlParams);
+            IEnumerable<ProfileDataModel> data = _dataAccess.LoadData<ProfileDataModel>(DboNames.spGetProfilesByUser, DboNames.dboName, sqlParams);
+
+            // Decrypt and reassign profile passwords
+            foreach(var profile in data)
+            {
+                profile.Password = ProfileEncrypter.DecryptPassword(profile.Password, profile.Id);
+            }
 
             return data;
         }
 
         public void InsertProfileForUser(ProfileDataModel data)
         {
+            data.Password = ProfileEncrypter.EncryptPassword(data.Password, data.Id);
+
             object sqlParams = new
             {
                 @userId = data.UserId,
@@ -46,6 +49,8 @@ namespace PasswordManager.Library.DataAccess
 
         public void UpdateProfile(ProfileDataModel data)
         {
+            data.Password = ProfileEncrypter.EncryptPassword(data.Password, data.Id);
+
             object sqlParams = new
             {
                 @id = data.Id,
