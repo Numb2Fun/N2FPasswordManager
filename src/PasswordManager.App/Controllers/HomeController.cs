@@ -10,7 +10,14 @@ namespace PasswordManager.App.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Profile");
+            }
+            else
+            { 
+                return RedirectToAction("Login", "Account");
+            }
         }
 
         public ActionResult About()

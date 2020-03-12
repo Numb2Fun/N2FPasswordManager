@@ -13,7 +13,7 @@ namespace PasswordManager.Library.DataAccess
         {
             var dataAccess = new SqlDataAccess();
 
-            IEnumerable<UserDataModel> users = dataAccess.LoadData<UserDataModel>(DboNames.spGetAllUsers, DboNames.dboName);
+            IEnumerable<UserDataModel> users = dataAccess.LoadData<UserDataModel>(DboNames.spGetAllUsers, DboNames.dboNameAzure);
 
             return users;
         }

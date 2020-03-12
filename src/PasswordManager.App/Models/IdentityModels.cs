@@ -22,7 +22,7 @@ namespace PasswordManager.App.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("PMData", throwIfV1Schema: false)
+            : base("AzurePasswordManagerData", throwIfV1Schema: false)
         {
         }
 
