@@ -83,11 +83,13 @@ namespace PasswordManager.App.Controllers
             if (profile.HasPasswordChanged)
                 profile.LastUpdated = DateTime.Now;
 
+            string userId = User.Identity.GetUserId();
             int catId = (int)profile.Category;
 
             var data = new ProfileDataModel()
             {
                 Id = id,
+                UserId = userId,
                 CategoryId = catId,
                 Title = profile.Title,
                 Website = profile.Website,
