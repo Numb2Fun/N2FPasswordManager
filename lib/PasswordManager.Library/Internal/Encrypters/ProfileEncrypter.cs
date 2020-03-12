@@ -12,10 +12,15 @@ namespace PasswordManager.Library.Internal.Encryption
 {
     internal static class ProfileEncrypter
     {
-        public static string EncryptPassword(string profilePassword, int profileId)
+        public static string EncryptPassword(string profilePassword, string userId)
         {
+            if (string.IsNullOrEmpty(userId))
+            {
+                throw new ArgumentException("Cannot encrypt password without proper userId.");
+            }
+
             var purposeA = "Password Protection";
-            var purposeB = $"Profile: {profileId}";
+            var purposeB = $"User: {userId}";
 
             byte[] unprotectedBytes = Encoding.UTF8.GetBytes(profilePassword);
             byte[] protectedBytes = MachineKey.Protect(unprotectedBytes, purposeA, purposeB);
@@ -24,10 +29,15 @@ namespace PasswordManager.Library.Internal.Encryption
             return protectedText;
         }
 
-        public static string DecryptPassword(string encryptedPassword, int profileId)
+        public static string DecryptPassword(string encryptedPassword, string userId)
         {
+            if (string.IsNullOrEmpty(userId))
+            {
+                throw new ArgumentException("Cannot decrypt password without proper userId.");
+            }
+
             var purposeA = "Password Protection";
-            var purposeB = $"Profile: {profileId}";
+            var purposeB = $"User: {userId}";
 
             byte[] protectedBytes = Convert.FromBase64String(encryptedPassword);
             byte[] unprotectedBytes = MachineKey.Unprotect(protectedBytes, purposeA, purposeB);
