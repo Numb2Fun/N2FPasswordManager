@@ -130,12 +130,6 @@ namespace PasswordManager.App.Controllers
             return RedirectToAction("Index");
         }
 
-        // GET: Profile/Delete/5
-        public ActionResult Delete(ProfileViewModel profile)
-        {
-            return View(profile);
-        }
-
         // POST: Profile/Delete/5
         [HttpPost]
         public ActionResult Delete(int id)
@@ -143,12 +137,6 @@ namespace PasswordManager.App.Controllers
             _profileData.DeleteProfile(id);
 
             return RedirectToAction("Index");
-        }
-
-        // GET: Profile/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
         }
     }
 }
