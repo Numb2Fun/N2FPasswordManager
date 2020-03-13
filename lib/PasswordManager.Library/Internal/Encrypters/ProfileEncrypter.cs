@@ -31,19 +31,26 @@ namespace PasswordManager.Library.Internal.Encryption
 
         public static string DecryptPassword(string encryptedPassword, string userId)
         {
-            if (string.IsNullOrEmpty(userId))
+            try
             {
-                throw new ArgumentException("Cannot decrypt password without proper userId.");
+                if (string.IsNullOrEmpty(userId))
+                {
+                    throw new ArgumentException("Cannot decrypt password without proper userId.");
+                }
+
+                var purposeA = "Password Protection";
+                var purposeB = $"User: {userId}";
+
+                byte[] protectedBytes = Convert.FromBase64String(encryptedPassword);
+                byte[] unprotectedBytes = MachineKey.Unprotect(protectedBytes, purposeA, purposeB);
+                string unprotectedText = Encoding.UTF8.GetString(unprotectedBytes);
+
+                return unprotectedText;
             }
-
-            var purposeA = "Password Protection";
-            var purposeB = $"User: {userId}";
-
-            byte[] protectedBytes = Convert.FromBase64String(encryptedPassword);
-            byte[] unprotectedBytes = MachineKey.Unprotect(protectedBytes, purposeA, purposeB);
-            string unprotectedText = Encoding.UTF8.GetString(unprotectedBytes);
-
-            return unprotectedText;
+            catch
+            {
+                return "Decryption Error";
+            }
         }
     }
 }

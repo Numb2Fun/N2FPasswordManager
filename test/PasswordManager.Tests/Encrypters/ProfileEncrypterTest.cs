@@ -12,7 +12,7 @@ namespace PasswordManager.Tests.Encrypters
         public void EncryptDecryptPassword_PasswordEqualsDecryptedOutput()
         {
             string password = "#Rjsl3kq&L";
-            int id = 354;
+            string id = "aeba7afb-a508-4f25-8414-b08255051fe4";
 
             string encryptedPassword = ProfileEncrypter.EncryptPassword(password, id);
             string decryptedPassword = ProfileEncrypter.DecryptPassword(encryptedPassword, id);
