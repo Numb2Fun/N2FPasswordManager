@@ -1,0 +1,11 @@
+﻿@model PasswordManager.App.Models.ProfileViewModel
+
+@using (Html.BeginForm("Delete", "Profile", FormMethod.Post, new { @class = "profile-btn-group delete-group" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Id)
+    
+    <p>Delete profile?</p>
+    <input type="submit" value="Confirm" class="profile-btn" />
+    <button type="button" class="profile-btn" onclick="onCancelDeleteClick()">Cancel</button>
+}
