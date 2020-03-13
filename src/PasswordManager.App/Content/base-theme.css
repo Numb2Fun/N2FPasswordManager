@@ -118,12 +118,30 @@ textarea {
     border: solid 4px var(--accent-color) !important;
 }
 
-.profile-btn-group {
-    width: 80%;
-    margin: auto;
+.profile-bottom {
+    max-width: 80%;
     display: flex;
     justify-content: flex-end;
     align-items: center;
+}
+
+.profile-btn-group {
+    max-width: 100%;
+    overflow: hidden;
+    transition: max-width 0.2s linear;
+    margin: 8px 0;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.profile-btn-group p {
+    white-space: nowrap;
+    overflow: hidden;
+    margin: 0 16px 0 0;
+    color: var(--secondary-text);
+    font-size: 24px;
 }
 
 .profile-btn {

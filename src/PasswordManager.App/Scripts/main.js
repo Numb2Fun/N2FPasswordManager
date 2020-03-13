@@ -3,6 +3,7 @@
 let lastButtonClicked; // Profile title button used to uncollapse details
 let lastProfileOpened; // Profile parent of button clicked
 let isEditing = false;
+let isDeleting = false;
 let editForm; // Profile details for value reversion in case of edit cancel
 
 collapseAll();
@@ -61,9 +62,12 @@ function onCategoryClick(button, liParentOffset = 2) {
 // Toggles visibility of clicked profile and previouse profile
 // param: liParentOffset => Indicates steps from button to reach parent li element
 function onProfileClick(button, liParentOffset = 2) {
-    // Cancel any in progress editing
+    // Cancel any in progress editing or deleting
     if (isEditing) {
         onCancelEditClick();
+    }
+    if (isDeleting) {
+        onCancelDeleteClick();
     }
     // Close previous profile
     if (lastProfileOpened != null) {
@@ -123,6 +127,24 @@ function onCancelEditClick() {
     //summaryList.innerHTML = "";
 }
 
+function onDeleteClick() {
+    const optionView = lastProfileOpened.querySelector('.option-group');
+    const deleteView = lastProfileOpened.querySelector('.delete-group');
+
+    optionView.style.maxWidth = '0';
+    deleteView.style.maxWidth = '100%';
+    isDeleting = true;
+}
+
+function onCancelDeleteClick() {
+    const optionView = lastProfileOpened.querySelector('.option-group');
+    const deleteView = lastProfileOpened.querySelector('.delete-group');
+
+    optionView.style.maxWidth = '100%';
+    deleteView.style.maxWidth = '0';
+    isDeleting = false;
+}
+
 function getParent(item, steps) {
     let parent = item;
     for (let i = 0; i < steps; i++) {
@@ -151,12 +173,17 @@ function toggleView(view) {
 function collapseAll() {
     const detailViews = document.querySelectorAll('.profile-detail-group');
     const editViews = document.querySelectorAll('.profile-edit-group');
+    const deleteViews = document.querySelectorAll('.delete-group');
 
-    detailViews.forEach((item) => {
+    detailViews.forEach(item => {
         item.style.maxHeight = null;
     });
 
-    editViews.forEach((item) => {
+    editViews.forEach(item => {
         item.style.maxHeight = null;
+    });
+
+    deleteViews.forEach(item => {
+        item.style.maxWidth = '0px';
     });
 };
