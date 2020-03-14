@@ -6,6 +6,12 @@
 }
 
 <h3 class="banner-header">Sign In</h3>
+@using (Html.BeginForm("LoginToDemo", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "banner-form", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    <input type="submit" value="Log in as demo" class="form-btn" />
+}
 
 @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "banner-form", role = "form" }))
 {

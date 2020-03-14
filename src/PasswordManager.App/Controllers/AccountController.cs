@@ -61,6 +61,18 @@ namespace PasswordManager.App.Controllers
             return View();
         }
 
+        [AllowAnonymous]
+        public async Task<ActionResult> LoginToDemo(string returnUrl)
+        {
+            var model = new LoginViewModel()
+            {
+                Email = "demo@demo.com",
+                Password = "Demo1!"
+            };
+
+            return await Login(model, returnUrl);
+        }
+
         //
         // POST: /Account/Login
         [HttpPost]

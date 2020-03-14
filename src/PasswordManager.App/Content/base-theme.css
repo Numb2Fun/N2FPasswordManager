@@ -189,6 +189,7 @@ textarea {
     text-align: left;
     color: var(--secondary-text);
     font-size: 28px;
+    min-height: 28px;
 }
 
 .profile-details * {
@@ -261,7 +262,7 @@ textarea {
 
 .banner {
     color: #eee;
-    margin: 0;
+    margin: 25px 0 0 0;
     display: grid;
     grid-template-columns: 1fr;
     grid-gap: 10px;
@@ -270,6 +271,7 @@ textarea {
 .banner h1 {
     text-align: center;
     font-size: 64px;
+    margin: 0;
 }
 
 .banner img {
@@ -289,6 +291,10 @@ textarea {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+}
+
+.banner-form p {
+    margin: 0;
 }
 
 .form-item-group {
@@ -314,10 +320,10 @@ textarea {
     margin-top: 16px;
     border: solid 4px;
     color: var(--primary-text);
-    width: 128px;
+    min-width: 128px;
     height: 48px;
     font-size: 24px;
-    font-weight: bold;
+    font-weight: normal;
 }
 
 .form-btn:hover {
