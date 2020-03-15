@@ -1,5 +1,6 @@
 # Password Manager <img src="./design/AppLogo_01.png" width="64"/>
-This web app is responsible to storing, generating, and managing user passwords for accounts across the internet.
+This web app is a demo application responsible to storing, generating, and managing user passwords for accounts across the internet.
+This app is deployed using Azure App Service, and all content posted to the db is subject to deletion.
 
 ## Component Model
 ![Component Model](./design/ComponentModel_02.png)
