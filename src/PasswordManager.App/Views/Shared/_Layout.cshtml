@@ -16,6 +16,12 @@
             <h2>Password Manager</h2>
             <ul>
                 <li>
+                    @Html.ActionLink("Profiles", "Index", "Profile")
+                </li>
+                <li>
+                    @Html.ActionLink("Account", "Index", "Manage")
+                </li>
+                <li>
                     @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
                     {
                         @Html.AntiForgeryToken()

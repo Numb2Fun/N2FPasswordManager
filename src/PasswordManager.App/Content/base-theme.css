@@ -236,9 +236,15 @@ textarea {
     align-items: center;
 }
 
+.navbar-group ul {
+    display: flex;
+    justify-content: flex-end;
+}
+
 .navbar-group li {
     list-style-type: none;
     text-decoration: none;
+    margin: auto 6px;
 }
 
 .navbar-group a {
