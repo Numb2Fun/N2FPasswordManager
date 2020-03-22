@@ -1,0 +1,15 @@
+﻿
+<h3>Deleting your account will permanently delete your account information and all profiles.</h3>
+<div class="toggle-group">
+    <div class="toggle-container">
+        <button class="profile-btn" onclick="cycleToggleContainers(this.parentNode.parentNode, 0, 1)">Delete Account</button>
+    </div>
+    @using (Html.BeginForm("DeleteAccount", "Manage", FormMethod.Post, new { @class = "toggle-container" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <p>Are you sure you want to delete this account?</p>
+        <input type="submit" value="Delete" class="profile-btn" />
+        <button type="button" class="profile-btn" onclick="cycleToggleContainers(this.parentNode.parentNode, 1, 0)">Cancel</button>
+    }
+</div>

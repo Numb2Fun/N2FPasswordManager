@@ -9,6 +9,29 @@ let editForm; // Profile details for value reversion in case of edit cancel
 collapseAll();
 linkCategoriesToProfiles();
 linkProfileTitlesToSubmitBtns();
+resetToggleContainers();
+
+function resetToggleContainers() {
+    const groups = Array.from(document.querySelectorAll('.toggle-group'));
+    groups.forEach(group => {
+        const containers = Array.from(group.querySelectorAll('.toggle-container'));
+        containers.forEach((container, index) => {
+            if (index == 0) {
+                container.style.maxHeight = container.scrollHeight + 30 + 'px';
+            }
+            else {
+                container.style.maxHeight = 0;
+            }
+        });
+    });
+}
+
+function cycleToggleContainers(toggleGroupElement, currentIndex, targetIndex) {
+    const containers = Array.from(toggleGroupElement.querySelectorAll('.toggle-container'));
+
+    containers[currentIndex].style.maxHeight = 0;
+    containers[targetIndex].style.maxHeight = containers[targetIndex].scrollHeight + 30 + 'px';
+}
 
 // When input for title textbox changes, the submit button is toggled 'disabled' depending on whether input exists
 function linkProfileTitlesToSubmitBtns() {
