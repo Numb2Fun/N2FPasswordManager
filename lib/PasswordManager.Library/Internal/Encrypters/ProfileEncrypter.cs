@@ -14,6 +14,11 @@ namespace PasswordManager.Library.Internal.Encryption
     {
         public static string EncryptPassword(string profilePassword, string userId)
         {
+            if (string.IsNullOrEmpty(profilePassword))
+            {
+                return profilePassword;
+            }
+
             if (string.IsNullOrEmpty(userId))
             {
                 throw new ArgumentException("Cannot encrypt password without proper userId.");
@@ -33,6 +38,11 @@ namespace PasswordManager.Library.Internal.Encryption
         {
             try
             {
+                if (string.IsNullOrEmpty(encryptedPassword))
+                {
+                    return encryptedPassword;
+                }
+
                 if (string.IsNullOrEmpty(userId))
                 {
                     throw new ArgumentException("Cannot decrypt password without proper userId.");
