@@ -9,5 +9,6 @@ namespace PasswordManager.Library.DataAccess
         void InsertProfileForUser(ProfileDataModel data);
         void UpdateProfile(ProfileDataModel data);
         void DeleteProfile(int id);
+        void DeleteProfilesForUser(string userId);
     }
 }

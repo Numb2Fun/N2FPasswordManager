@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using PasswordManager.App.Models;
+using PasswordManager.Library.DataAccess;
 
 namespace PasswordManager.App.Controllers
 {
@@ -73,6 +74,26 @@ namespace PasswordManager.App.Controllers
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
             };
             return View(model);
+        }
+        
+        /// <summary>
+        /// Delete currently logged user.
+        /// </summary>
+        /// <returns></returns>
+        // POST: /Manage/Delete
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DeleteAccount()
+        {
+            IProfileData _profileData = new ProfileData();
+            string userId = User.Identity.GetUserId();
+            var user = await UserManager.FindByIdAsync(userId);
+            // Delete profiles associated with users
+            _profileData.DeleteProfilesForUser(userId);
+            // Delete aspNetUser
+            await UserManager.DeleteAsync(user);
+
+            return RedirectToAction("Login", "Account");
         }
 
         //

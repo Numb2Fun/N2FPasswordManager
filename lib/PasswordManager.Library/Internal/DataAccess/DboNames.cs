@@ -11,6 +11,8 @@ namespace PasswordManager.Library.Internal.DataAccess
 
         public const string spGetAllUsers = "dbo.spUser_GetAll";
         public const string spGetProfilesByUser = "dbo.spProfiles_GetForUser";
+        public const string spDeleteProfilesForUser = "dbo.spProfiles_DeleteAllForUser";
+
         public const string spInsertProfileByUser = "dbo.spProfiles_InsertForUser";
         public const string spUpdateProfile = "dbo.spProfiles_UpdateProfile";
         public const string spDeleteProfile = "dbo.spProfiles_DeleteProfile";

@@ -71,5 +71,10 @@ namespace PasswordManager.Library.DataAccess
         {
             _dataAccess.SaveData(DboNames.spDeleteProfile, DboNames.dboNameAzure, new { @id = id });
         }
+
+        public void DeleteProfilesForUser(string userId)
+        {
+            _dataAccess.SaveData(DboNames.spDeleteProfilesForUser, DboNames.dboNameAzure, new { @userId = userId });
+        }
     }
 }
