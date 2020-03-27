@@ -145,6 +145,9 @@ function onCancelEditClick() {
     editView.querySelector("#LoginName").value = editForm.LoginName;
     editView.querySelector("#Password").value = editForm.Password;
     editView.querySelector("#SignUpEmail").value = editForm.SignUpEmail;
+    // Reset submit button (in case edit is canceled with empty title box)
+    const submitBtn = editView.querySelector('.profile-submit');
+    submitBtn.disabled = false;
     // Clear validation summary -> Validation Summary Not Currently in HTML
     //const summaryList = editView.querySelector(".form-message").querySelector("ul");
     //summaryList.innerHTML = "";
