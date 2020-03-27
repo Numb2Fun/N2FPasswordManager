@@ -21,7 +21,7 @@ A button also exists on the login page that allows users to log into a 'demo use
 ## Component Model
 ![Component Model](./design/ComponentModel_02.png)
 
-## Database Model
+## Entity-Relationship Model
 ![DB Model](./design/EntityRelationship_02.png)
 
 ## Login Page Mockup
